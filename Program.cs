@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using TournXBack.Data;
+using TournXBack.Players.Interfaces;
+using TournXBack.Players.Repository;
+using TournXBack.Teams.Interfaces;
+using TournXBack.Teams.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +17,9 @@ var connectionString = builder.Configuration.GetConnectionString("PostgreSQLConn
 builder.Services.AddDbContext<TournXDB>(options =>
     options.UseNpgsql(connectionString)
 );
+
+builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
+builder.Services.AddScoped<ITeamRepository, TeamRepository>();
 
 var app = builder.Build();
 

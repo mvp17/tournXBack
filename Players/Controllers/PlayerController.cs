@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using TournXBack.Data;
+using TournXBack.Players.Interfaces;
 using TournXBack.Players.Models;
 
 namespace TournXBack.Players.Controllers
@@ -9,23 +8,23 @@ namespace TournXBack.Players.Controllers
     [ApiController]
     public class PlayerController : ControllerBase
     {
-        private readonly TournXDB _context;
-        public PlayerController(TournXDB context)
+        private readonly IPlayerRepository _playerRepository;
+        public PlayerController(IPlayerRepository playerRepository)
         {
-            _context = context;
+            _playerRepository = playerRepository;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var players = await _context.Players.ToListAsync();
+            var players = await _playerRepository.GetAllAsync();
             return Ok(players);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            var player = await _context.Players.FindAsync(id);
+            var player = await _playerRepository.GetByIdAsync(id);
             if (player == null) return NotFound();
 
             return Ok(player);
@@ -34,57 +33,26 @@ namespace TournXBack.Players.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] PlayerRequestDto playerDto)
         {
-            var lastPlayer = await _context.Players.OrderByDescending(p => p.Id).FirstOrDefaultAsync();
-            if (lastPlayer != null) {
-                var newPlayer = new Player {
-                    Id = lastPlayer.Id + 1,
-                    Username = playerDto.Username,
-                    Email = playerDto.Email,
-                    Password = playerDto.Password
-                };
-                await _context.Players.AddAsync(newPlayer);
-                await _context.SaveChangesAsync();
-                return Ok(newPlayer);
-            }
-            else {
-                var newPlayer = new Player {
-                    Id = 1,
-                    Username = playerDto.Username,
-                    Email = playerDto.Email,
-                    Password = playerDto.Password
-                };
-                await _context.Players.AddAsync(newPlayer);
-                await _context.SaveChangesAsync();
-                return Ok(newPlayer);
-            }
+            var newPlayer = await _playerRepository.CreateAsync(playerDto);
+            return Ok(newPlayer);
         }
 
         [HttpPut]
         [Route("{id}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] PlayerRequestDto playerDto)
         {
-            var player = await _context.Players.FirstOrDefaultAsync(x => x.Id == id);
-            if (player == null) return NotFound();
+            var updatedPlayer = await _playerRepository.UpdateAsync(id, playerDto);
+            if (updatedPlayer == null) return NotFound();
 
-            player.Username = playerDto.Username;
-            player.Email = playerDto.Email;
-            player.Password = playerDto.Password;
-
-            await _context.SaveChangesAsync();
-
-            return Ok(player);
+            return Ok(updatedPlayer);
         }
 
         [HttpDelete]
         [Route("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            var player = _context.Players.FirstOrDefault(x => x.Id == id);
+            var player = await _playerRepository.DeleteAsync(id);
             if (player == null) return NotFound();
-
-            _context.Players.Remove(player);
-
-            await _context.SaveChangesAsync();
 
             return NoContent();
         }

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TournXBack.Players.Models;
+using TournXBack.Teams.Models;
 
 namespace TournXBack.Data
 {
@@ -10,5 +11,6 @@ namespace TournXBack.Data
 
         }
         public DbSet<Player> Players => Set<Player>();
+        public DbSet<Team> Teams => Set<Team>();
     }
 }
