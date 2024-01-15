@@ -4,6 +4,8 @@ using TournXBack.Teams.Models;
 
 namespace TournXBack.Teams.Controllers
 {
+    [Route("api/team")]
+    [ApiController]
     public class TeamController : ControllerBase
     {
         private readonly ITeamRepository _teamRepository;
@@ -15,30 +17,32 @@ namespace TournXBack.Teams.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
+            if (!ModelState.IsValid) return BadRequest();
             var teams = await _teamRepository.GetAllAsync();
             return Ok(teams);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
             var team = await _teamRepository.GetByIdAsync(id);
             if (team == null) return NotFound();
-
             return Ok(team);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] TeamRequestDto teamDto)
         {
+            if (!ModelState.IsValid) return BadRequest();
             var newTeam = await _teamRepository.CreateAsync(teamDto);
             return Ok(newTeam);
         }
 
         [HttpPut]
-        [Route("{id}")]
+        [Route("{id:int}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] TeamRequestDto teamDto)
         {
+            if (!ModelState.IsValid) return BadRequest();
             var updatedTeam = await _teamRepository.UpdateAsync(id, teamDto);
             if (updatedTeam == null) return NotFound();
 
@@ -46,12 +50,12 @@ namespace TournXBack.Teams.Controllers
         }
 
         [HttpDelete]
-        [Route("{id}")]
+        [Route("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
+            if (!ModelState.IsValid) return BadRequest();
             var team = await _teamRepository.DeleteAsync(id);
             if (team == null) return NotFound();
-
             return NoContent();
         }
     }

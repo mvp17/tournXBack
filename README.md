@@ -1,3 +1,3 @@
-# dotnet ef migrations add firstmigration --project TournXBack.csproj
-# dotnet ef database update firstmigration --project TournXBack.csproj
-# dotnet run
+# dotnet ef migrations add [whatever] --project TournXBack.csproj
+# dotnet ef database update --project TournXBack.csproj
+# dotnet watch run
