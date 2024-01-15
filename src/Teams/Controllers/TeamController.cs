@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TournXBack.Teams.Interfaces;
 using TournXBack.Teams.Models;
@@ -15,6 +16,7 @@ namespace TournXBack.Teams.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAll()
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -23,6 +25,7 @@ namespace TournXBack.Teams.Controllers
         }
 
         [HttpGet("{id:int}")]
+        [Authorize]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
             var team = await _teamRepository.GetByIdAsync(id);
@@ -31,6 +34,7 @@ namespace TournXBack.Teams.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create([FromBody] TeamRequestDto teamDto)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -39,6 +43,7 @@ namespace TournXBack.Teams.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         [Route("{id:int}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] TeamRequestDto teamDto)
         {
@@ -50,6 +55,7 @@ namespace TournXBack.Teams.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         [Route("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {

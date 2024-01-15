@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using TournXBack.Data;
 using TournXBack.Players.Models;
+using TournXBack.src.Players.Interfaces;
+using TournXBack.src.Players.Services;
 using TournXBack.Teams.Interfaces;
 using TournXBack.Teams.Repository;
 
@@ -49,6 +51,7 @@ builder.Services.AddAuthentication(options => {
 });
 
 builder.Services.AddScoped<ITeamRepository, TeamRepository>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
 

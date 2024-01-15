@@ -44,7 +44,12 @@ namespace TournXBack.src.Players.Controllers
                     var roleResult = await _userManager.AddToRoleAsync(player, "User");
                     
                     if (roleResult.Succeeded) 
-                        return Ok("User created");
+                        return Ok( new NewUserDto
+                            {
+                                UserName = player.UserName,
+                                Email = player.Email,
+                                Token = _tokenService.CreateToken(player)
+                            });
                     else return StatusCode(500, roleResult.Errors);
                 }
                 else return StatusCode(500, createdUser.Errors);
