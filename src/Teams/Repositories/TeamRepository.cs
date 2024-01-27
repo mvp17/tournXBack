@@ -1,23 +1,23 @@
 using Microsoft.EntityFrameworkCore;
-using TournXBack.Data;
-using TournXBack.Teams.Interfaces;
-using TournXBack.Teams.Models;
+using TournXBack.src.Data;
+using TournXBack.src.Teams.Interfaces;
+using TournXBack.src.Teams.Models;
 
-namespace TournXBack.Teams.Repository
+namespace TournXBack.src.Teams.Repositories
 {
     public class TeamRepository(TournXDB context) : ITeamRepository
     {
         private readonly TournXDB _context = context;
 
-        public async Task<Team> CreateAsync(TeamRequestDto teamDto)
+        public async Task<Team> CreateAsync(TeamRequestDto teamRequestDto)
         {
             var lastTeam = await _context.Teams.OrderByDescending(p => p.Id).FirstOrDefaultAsync();
             if (lastTeam != null) {
                 var newTeam = new Team {
                     Id = lastTeam.Id + 1,
-                    Name = teamDto.Name,
-                    Level = teamDto.Level,
-                    Game = teamDto.Game
+                    Name = teamRequestDto.Name,
+                    Level = teamRequestDto.Level,
+                    Game = teamRequestDto.Game
                 };
                 await _context.Teams.AddAsync(newTeam);
                 await _context.SaveChangesAsync();
@@ -26,9 +26,9 @@ namespace TournXBack.Teams.Repository
             else {
                 var newTeam = new Team {
                     Id = 1,
-                    Name = teamDto.Name,
-                    Level = teamDto.Level,
-                    Game = teamDto.Game
+                    Name = teamRequestDto.Name,
+                    Level = teamRequestDto.Level,
+                    Game = teamRequestDto.Game
                 };
                 await _context.Teams.AddAsync(newTeam);
                 await _context.SaveChangesAsync();
@@ -58,14 +58,14 @@ namespace TournXBack.Teams.Repository
             return await _context.Teams.FindAsync(id);
         }
 
-        public async Task<Team?> UpdateAsync(int id, TeamRequestDto teamDto)
+        public async Task<Team?> UpdateAsync(int id, TeamRequestDto teamRequestDto)
         {
             var existingTeam = await _context.Teams.FirstOrDefaultAsync(x => x.Id == id);
             if (existingTeam == null) return null;
 
-            existingTeam.Name = teamDto.Name;
-            existingTeam.Level = teamDto.Level;
-            existingTeam.Game = teamDto.Game;
+            existingTeam.Name = teamRequestDto.Name;
+            existingTeam.Level = teamRequestDto.Level;
+            existingTeam.Game = teamRequestDto.Game;
 
             await _context.SaveChangesAsync();
             

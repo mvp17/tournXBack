@@ -1,6 +1,6 @@
-using TournXBack.Teams.Models;
+using TournXBack.src.Teams.Models;
 
-namespace TournXBack.Teams.Interfaces
+namespace TournXBack.src.Teams.Interfaces
 {
     public interface ITeamRepository
     {

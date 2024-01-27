@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace TournXBack.Players.Models 
+namespace TournXBack.src.Players.Models 
 {
     public class Player : IdentityUser
     {

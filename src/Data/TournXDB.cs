@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using TournXBack.Players.Models;
-using TournXBack.Teams.Models;
+using TournXBack.src.MatchResults.Models;
+using TournXBack.src.Players.Models;
+using TournXBack.src.Teams.Models;
+using TournXBack.src.Tournaments.Models;
 
-namespace TournXBack.Data
+namespace TournXBack.src.Data
 {
     public class TournXDB : IdentityDbContext<Player>
     {
@@ -14,6 +16,8 @@ namespace TournXBack.Data
         }
         
         public DbSet<Team> Teams => Set<Team>();
+        public DbSet<Tournament> Tournaments => Set<Tournament>();
+        public DbSet<MatchResult> MatchResults => Set<MatchResult>();
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

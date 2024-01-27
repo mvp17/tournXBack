@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TournXBack.Teams.Interfaces;
-using TournXBack.Teams.Models;
+using TournXBack.src.Teams.Interfaces;
+using TournXBack.src.Teams.Models;
 
-namespace TournXBack.Teams.Controllers
+namespace TournXBack.src.Teams.Controllers
 {
     [Route("api/team")]
     [ApiController]
@@ -62,6 +62,7 @@ namespace TournXBack.Teams.Controllers
             if (!ModelState.IsValid) return BadRequest();
             var team = await _teamRepository.DeleteAsync(id);
             if (team == null) return NotFound();
+            
             return NoContent();
         }
     }

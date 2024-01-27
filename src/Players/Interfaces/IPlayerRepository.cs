@@ -1,6 +1,6 @@
-using TournXBack.Players.Models;
+using TournXBack.src.Players.Models;
 
-namespace TournXBack.Players.Interfaces
+namespace TournXBack.src.Players.Interfaces
 {
     public interface IPlayerRepository
     {

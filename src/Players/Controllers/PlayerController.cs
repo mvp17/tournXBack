@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using TournXBack.Players.Models;
-using TournXBack.src.Players.Interfaces;
 using TournXBack.src.Players.Models;
+using TournXBack.src.Players.Interfaces;
 
 namespace TournXBack.src.Players.Controllers
 {
@@ -37,6 +36,8 @@ namespace TournXBack.src.Players.Controllers
                     Email = playerRequestDto.Email
                 };
 
+                if  (playerRequestDto.Password == null) return BadRequest("Password cannot be null");
+                
                 var createdUser = await _userManager.CreateAsync(player, playerRequestDto.Password);
 
                 if (createdUser.Succeeded)
@@ -64,8 +65,11 @@ namespace TournXBack.src.Players.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+            
+            if (loginDto.Username == null || loginDto.Password == null)
+                return BadRequest("Username or password cannot be null");
 
-            var user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower());
+            var user = await _userManager.Users.FirstOrDefaultAsync(first => first.UserName == loginDto.Username.ToLower());
 
             if (user == null) return Unauthorized("Invalid username!");
 

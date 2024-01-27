@@ -1,4 +1,4 @@
-namespace TournXBack.Teams.Models
+namespace TournXBack.src.Teams.Models
 {
     public class Team
     {

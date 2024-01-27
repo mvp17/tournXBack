@@ -2,12 +2,16 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using TournXBack.Data;
-using TournXBack.Players.Models;
+using TournXBack.src.Data;
+using TournXBack.src.Players.Models;
 using TournXBack.src.Players.Interfaces;
 using TournXBack.src.Players.Services;
-using TournXBack.Teams.Interfaces;
-using TournXBack.Teams.Repository;
+using TournXBack.src.Teams.Interfaces;
+using TournXBack.src.Teams.Repositories;
+using TournXBack.src.Tournaments.Interfaces;
+using TournXBack.src.Tournaments.Repositories;
+using TournXBack.src.MatchResults.Interfaces;
+using TournXBack.src.MatchResults.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,6 +55,8 @@ builder.Services.AddAuthentication(options => {
 });
 
 builder.Services.AddScoped<ITeamRepository, TeamRepository>();
+builder.Services.AddScoped<ITournamentRepository, TournamentRepository>();
+builder.Services.AddScoped<IMatchResultRepository, MatchResultRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
