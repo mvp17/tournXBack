@@ -1,8 +1,8 @@
-using Microsoft.AspNetCore.Identity;
+using TournXBack.src.core.Models;
 
 namespace TournXBack.src.Players.Models 
 {
-    public class Player : IdentityUser
+    public class Player : User
     {
         
     }

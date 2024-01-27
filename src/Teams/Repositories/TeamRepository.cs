@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using TournXBack.src.Data;
+using TournXBack.src.core.Data;
 using TournXBack.src.Teams.Interfaces;
 using TournXBack.src.Teams.Models;
 

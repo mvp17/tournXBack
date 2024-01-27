@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using TournXBack.src.Data;
+using TournXBack.src.core.Data;
 using TournXBack.src.TournamentInvitations.Interfaces;
 using TournXBack.src.TournamentInvitations.Models;
 

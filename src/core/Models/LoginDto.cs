@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace TournXBack.src.Players.Models
+namespace TournXBack.src.core.Models
 {
     public class LoginDto
     {

@@ -2,10 +2,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using TournXBack.src.Data;
+using TournXBack.src.core.Data;
 using TournXBack.src.Players.Models;
-using TournXBack.src.Players.Interfaces;
-using TournXBack.src.Players.Services;
 using TournXBack.src.Teams.Interfaces;
 using TournXBack.src.Teams.Repositories;
 using TournXBack.src.Tournaments.Interfaces;
@@ -16,6 +14,7 @@ using TournXBack.src.TeamInvitations.Interfaces;
 using TournXBack.src.TeamInvitations.Repositories;
 using TournXBack.src.TournamentInvitations.Interfaces;
 using TournXBack.src.TournamentInvitations.Repositories;
+using TournXBack.src.core.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

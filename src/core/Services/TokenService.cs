@@ -1,11 +1,10 @@
-using TournXBack.src.Players.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
-using TournXBack.src.Players.Models;
+using TournXBack.src.core.Models;
 
-namespace TournXBack.src.Players.Services
+namespace TournXBack.src.core.Services
 {
     public class TokenService : ITokenService
     {
@@ -17,7 +16,7 @@ namespace TournXBack.src.Players.Services
             _config = config;
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SigningKey"] ?? throw new ArgumentNullException("JWT:SigningKey")));
         }
-        public string? CreateToken(Player user)
+        public string? CreateToken(User user)
         {
             if (user.Email == null || user.UserName == null) return null;
             var claims = new List<Claim>

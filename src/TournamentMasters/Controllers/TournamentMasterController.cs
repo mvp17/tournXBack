@@ -3,21 +3,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TournXBack.src.core.Models;
 using TournXBack.src.core.Services;
-using TournXBack.src.Players.Models;
+using TournXBack.src.TournamentMasters.Models;
 
-namespace TournXBack.src.Players.Controllers
+namespace TournXBack.src.TournamentMasters.Controllers
 {
-    [Route("api/player")]
+    [Route("api/tournamentMaster")]
     [ApiController]
-    public class PlayerController : ControllerBase
+    public class TournamentMasterController : ControllerBase
     {
-        private readonly UserManager<Player> _userManager;
-        private readonly SignInManager<Player> _signinManager;
+        private readonly UserManager<TournamentMaster> _userManager;
+        private readonly SignInManager<TournamentMaster> _signinManager;
         private readonly ITokenService _tokenService;
 
-        public PlayerController(UserManager<Player> userManager, 
+        public TournamentMasterController(UserManager<TournamentMaster> userManager, 
                                 ITokenService tokenService, 
-                                SignInManager<Player> signInManager)
+                                SignInManager<TournamentMaster> signInManager)
         {
             _userManager = userManager;
             _signinManager = signInManager;
@@ -25,32 +25,32 @@ namespace TournXBack.src.Players.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] UserRequestDto playerRequestDto)
+        public async Task<IActionResult> Register([FromBody] UserRequestDto tournamentMasterRequestDto)
         {
             try 
             {
                 if (!ModelState.IsValid) return BadRequest(ModelState);
 
-                var player = new Player
+                var tournamentMaster = new TournamentMaster
                 {
-                    UserName = playerRequestDto.Username,
-                    Email = playerRequestDto.Email
+                    UserName = tournamentMasterRequestDto.Username,
+                    Email = tournamentMasterRequestDto.Email
                 };
 
-                if  (playerRequestDto.Password == null) return BadRequest("Password cannot be null");
+                if  (tournamentMasterRequestDto.Password == null) return BadRequest("Password cannot be null");
                 
-                var createdUser = await _userManager.CreateAsync(player, playerRequestDto.Password);
+                var createdUser = await _userManager.CreateAsync(tournamentMaster, tournamentMasterRequestDto.Password);
 
                 if (createdUser.Succeeded)
                 {
-                    var roleResult = await _userManager.AddToRoleAsync(player, "Player");
+                    var roleResult = await _userManager.AddToRoleAsync(tournamentMaster, "Tournament Master");
                     
                     if (roleResult.Succeeded) 
                         return Ok( new NewUserDto
                             {
-                                UserName = player.UserName,
-                                Email = player.Email,
-                                Token = _tokenService.CreateToken(player)
+                                UserName = tournamentMaster.UserName,
+                                Email = tournamentMaster.Email,
+                                Token = _tokenService.CreateToken(tournamentMaster)
                             });
                     else return StatusCode(500, roleResult.Errors);
                 }

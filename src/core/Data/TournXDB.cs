@@ -8,7 +8,7 @@ using TournXBack.src.Teams.Models;
 using TournXBack.src.TournamentInvitations.Models;
 using TournXBack.src.Tournaments.Models;
 
-namespace TournXBack.src.Data
+namespace TournXBack.src.core.Data
 {
     public class TournXDB : IdentityDbContext<Player>
     {
@@ -33,9 +33,13 @@ namespace TournXBack.src.Data
                     NormalizedName = "ADMIN"
                 },
                 new() {
-                    Name = "User",
-                    NormalizedName = "USER"
+                    Name = "Player",
+                    NormalizedName = "PLAYER"
                 },
+                new() {
+                    Name = "Tournament Master",
+                    NormalizedName = "TOURNAMENT MASTER"
+                }
             };
             builder.Entity<IdentityRole>().HasData(roles);
         }

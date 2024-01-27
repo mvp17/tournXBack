@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace TournXBack.src.Players.Models
+namespace TournXBack.src.core.Models
 {
-    public class PlayerRequestDto
+    public class UserRequestDto
     {
         [Required]
         [MinLength(5, ErrorMessage = "Username must be 5 characters")]
