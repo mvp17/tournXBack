@@ -12,6 +12,10 @@ using TournXBack.src.Tournaments.Interfaces;
 using TournXBack.src.Tournaments.Repositories;
 using TournXBack.src.MatchResults.Interfaces;
 using TournXBack.src.MatchResults.Repositories;
+using TournXBack.src.TeamInvitations.Interfaces;
+using TournXBack.src.TeamInvitations.Repositories;
+using TournXBack.src.TournamentInvitations.Interfaces;
+using TournXBack.src.TournamentInvitations.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -57,6 +61,8 @@ builder.Services.AddAuthentication(options => {
 builder.Services.AddScoped<ITeamRepository, TeamRepository>();
 builder.Services.AddScoped<ITournamentRepository, TournamentRepository>();
 builder.Services.AddScoped<IMatchResultRepository, MatchResultRepository>();
+builder.Services.AddScoped<ITeamInvitationRepository, TeamInvitationRepository>();
+builder.Services.AddScoped<ITournamentInvitationRepository, TournamentInvitationRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
