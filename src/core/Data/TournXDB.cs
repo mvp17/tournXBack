@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using TournXBack.src.MatchResults.Models;
-using TournXBack.src.Players.Models;
-using TournXBack.src.TeamInvitations.Models;
-using TournXBack.src.Teams.Models;
-using TournXBack.src.TournamentInvitations.Models;
-using TournXBack.src.Tournaments.Models;
+using TournXBack.src.modules.MatchResults.Models;
+using TournXBack.src.modules.Players.Models;
+using TournXBack.src.modules.TeamInvitations.Models;
+using TournXBack.src.modules.Teams.Models;
+using TournXBack.src.modules.TournamentInvitations.Models;
+using TournXBack.src.modules.Tournaments.Models;
 
 namespace TournXBack.src.core.Data
 {
