@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using TournXBack.src.modules.Matches.Models;
 using TournXBack.src.modules.MatchResults.Models;
 using TournXBack.src.modules.Players.Models;
+using TournXBack.src.modules.Rounds.Models;
 using TournXBack.src.modules.TeamInvitations.Models;
 using TournXBack.src.modules.Teams.Models;
 using TournXBack.src.modules.TournamentInvitations.Models;
@@ -24,6 +25,7 @@ namespace TournXBack.src.core.Data
         public DbSet<TeamInvitation> TeamInvitations => Set<TeamInvitation>();
         public DbSet<TournamentInvitation> TournamentInvitations => Set<TournamentInvitation>();
         public DbSet<Match> Matches => Set<Match>();
+        public DbSet<Round> Rounds => Set<Round>();
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
