@@ -17,7 +17,8 @@ namespace TournXBack.src.modules.Matches.Repositories
                     Id = lastMatch.Id + 1,
                     Description = matchRequestDto.Description,
                     Winner      = matchRequestDto.Winner,
-                    Round       = matchRequestDto.Round
+                    Round       = matchRequestDto.Round,
+                    HasWinner   = matchRequestDto.HasWinner
                 };
                 await _context.Matches.AddAsync(newMatch);
                 await _context.SaveChangesAsync();
@@ -28,7 +29,8 @@ namespace TournXBack.src.modules.Matches.Repositories
                     Id = 1,
                     Description = matchRequestDto.Description,
                     Winner      = matchRequestDto.Winner,
-                    Round       = matchRequestDto.Round
+                    Round       = matchRequestDto.Round,
+                    HasWinner   = matchRequestDto.HasWinner
                 };
                 await _context.Matches.AddAsync(newMatch);
                 await _context.SaveChangesAsync();
@@ -66,6 +68,7 @@ namespace TournXBack.src.modules.Matches.Repositories
             existingMatch.Description = matchRequestDto.Description;
             existingMatch.Winner      = matchRequestDto.Winner;
             existingMatch.Round       = matchRequestDto.Round;
+            existingMatch.HasWinner   = matchRequestDto.HasWinner;
 
             await _context.SaveChangesAsync();
             

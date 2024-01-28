@@ -6,5 +6,6 @@ namespace TournXBack.src.modules.Matches.Models
         public string Description { get; set; } = string.Empty;
         public string Winner { get; set; } = string.Empty;
         public string Round { get; set; } = string.Empty;
+        public bool HasWinner { get; set; }
     }
 }
