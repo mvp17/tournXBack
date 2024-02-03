@@ -4,10 +4,10 @@ namespace TournXBack.src.modules.Matches.Models
     {
         public int Id  { get; set; }
         public string Description { get; set; } = string.Empty;
-        // Team
+        // TeamId
         public int Winner { get; set; }
-        // Round
+        // RoundId
         public int Round { get; set; }
-        public bool HasWinner { get; set; }
+        public bool HasWinner { get; set; } = false;
     }
 }

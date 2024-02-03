@@ -16,7 +16,7 @@ namespace TournXBack.src.Tournaments.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Tournament Master")]
         public async Task<IActionResult> GetAll()
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -25,7 +25,7 @@ namespace TournXBack.src.Tournaments.Controllers
         }
 
         [HttpGet("{id:int}")]
-        [Authorize]
+        [Authorize(Roles = "Tournament Master")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
             var tournament = await _tournamentRepository.GetByIdAsync(id);
@@ -34,7 +34,7 @@ namespace TournXBack.src.Tournaments.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Tournament Master")]
         public async Task<IActionResult> Create([FromBody] TournamentRequestDto tournamentRequestDto)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -43,7 +43,7 @@ namespace TournXBack.src.Tournaments.Controllers
         }
 
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = "Tournament Master")]
         [Route("{id:int}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] TournamentRequestDto tournamentRequestDto)
         {
@@ -55,7 +55,7 @@ namespace TournXBack.src.Tournaments.Controllers
         }
 
         [HttpDelete]
-        [Authorize]
+        [Authorize(Roles = "Tournament Master")]
         [Route("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
