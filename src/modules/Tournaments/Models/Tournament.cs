@@ -1,7 +1,9 @@
 using TournXBack.src.modules.Tournaments.Models.enums;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TournXBack.src.modules.Tournaments.Models
 {
+    [Table("Tournaments")]
     public class Tournament
     {
         public int Id { get; set; }
@@ -15,10 +17,8 @@ namespace TournXBack.src.modules.Tournaments.Models
         public int MinTeamPlayers { get; set; }
         public int MaxTeamPlayers { get; set; }
         // Many to Many
-        // Teams
-        public int[] Participants { get; set; } = [];
-        // TeamId
-        public int Team { get; set; }
+        public List<TournamentTeam> Participants { get; set; } = [];
+        public int TeamId { get; set; }
         public int BestOf { get; set; }
         public TournamentState State { get; set; } = TournamentState.UNINITIALIZED;
     }

@@ -1,13 +1,14 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace TournXBack.src.modules.Matches.Models
 {
+    [Table("Matches")]
     public class Match
     {
         public int Id  { get; set; }
         public string Description { get; set; } = string.Empty;
-        // TeamId
-        public int Winner { get; set; }
-        // RoundId
-        public int Round { get; set; }
+        public int WinnerTeamId { get; set; }
+        public int RoundId { get; set; }
         public bool HasWinner { get; set; } = false;
     }
 }

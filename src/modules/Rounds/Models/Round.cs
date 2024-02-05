@@ -1,20 +1,20 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace TournXBack.src.modules.Rounds.Models
 {
+    [Table("Rounds")]
     public class Round
     {
         public int Id { get; set; }
         public int BestOf { get; set; } = 1;
         public int NumTeams { get; set; } = 2;
-        // TeamId
-        public int Winner { get; set; }
+        public int WinnerTeamId { get; set; }
         // Many to Many
-        // Teams
-        public int[] Rivals { get; set; } = [];
+        public List<RoundTeam> Rivals { get; set; } = [];
         // One to One
-        // Round
-        public int NextRound { get; set; }
-        // TournamentId
-        public int Tournament { get; set; }
+        public int? NextRoundId { get; set; }
+        public Round? NextRound { get; set; }
+        public int TournamentId { get; set; }
         public bool HasWinner { get; set; } = false;
     }
 }
