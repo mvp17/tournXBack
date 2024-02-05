@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using TournXBack.src.modules.Tournaments.Models.enums;
 
 namespace TournXBack.src.modules.Tournaments.Models
 {
@@ -10,7 +11,7 @@ namespace TournXBack.src.modules.Tournaments.Models
         public string Name { get; set; } = string.Empty;
         
         [Required]
-        public string Level { get; set; } = string.Empty;
+        public Level Level { get; set; }
         
         [Required]
         public string Game { get; set; } = string.Empty;
@@ -32,5 +33,16 @@ namespace TournXBack.src.modules.Tournaments.Models
         
         [Required]
         public int MaxTeamPlayers { get; set; }
+
+        [Required]
+        public int[] Participants { get; set; } = [];
+        
+        [Required]
+        public int TeamId { get; set; }
+        
+        [Required]
+        public int BestOf { get; set; }
+        
+        public TournamentState? State { get; set; }
     }
 }

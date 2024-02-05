@@ -5,10 +5,10 @@ namespace TournXBack.src.modules.MatchResults.Models
     public class MatchResultRequestDto
     {
         [Required]
-        public string Match { get; set; } = string.Empty;
+        public int MatchId { get; set; }
         
         [Required]
-        public string Winner { get; set; } = string.Empty;
+        public int WinnerTeamId { get; set; }
         
         [MinLength(5, ErrorMessage = "Result must be 5 characters")]
         [MaxLength(256, ErrorMessage = "Result cannot be over 280 characters")]

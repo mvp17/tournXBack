@@ -14,10 +14,10 @@ namespace TournXBack.src.modules.MatchResults.Repositories
             var lastMatchResult = await _context.MatchResults.OrderByDescending(p => p.Id).FirstOrDefaultAsync();
             if (lastMatchResult != null) {
                 var newMatchResult = new MatchResult {
-                    Id    = lastMatchResult.Id + 1,
-                    Match  = matchResultRequestDto.Match,
-                    WinnerTeam = matchResultRequestDto.WinnerTeam,
-                    Result  = matchResultRequestDto.Result
+                    Id           = lastMatchResult.Id + 1,
+                    MatchId      = matchResultRequestDto.MatchId,
+                    WinnerTeamId = matchResultRequestDto.WinnerTeamId,
+                    Result       = matchResultRequestDto.Result
                 };
                 await _context.MatchResults.AddAsync(newMatchResult);
                 await _context.SaveChangesAsync();
@@ -25,10 +25,10 @@ namespace TournXBack.src.modules.MatchResults.Repositories
             }
             else {
                 var newMatchResult = new MatchResult {
-                    Id    = 1,
-                    Match  = matchResultRequestDto.Match,
-                    WinnerTeam = matchResultRequestDto.WinnerTeam,
-                    Result  = matchResultRequestDto.Result
+                    Id           = 1,
+                    MatchId      = matchResultRequestDto.MatchId,
+                    WinnerTeamId = matchResultRequestDto.WinnerTeamId,
+                    Result       = matchResultRequestDto.Result
                 };
                 await _context.MatchResults.AddAsync(newMatchResult);
                 await _context.SaveChangesAsync();
@@ -63,9 +63,9 @@ namespace TournXBack.src.modules.MatchResults.Repositories
             var existingMatchResult = await _context.MatchResults.FirstOrDefaultAsync(x => x.Id == id);
             if (existingMatchResult == null) return null;
 
-            existingMatchResult.Match  = matchResultRequestDto.Match;
-            existingMatchResult.WinnerTeam = matchResultRequestDto.WinnerTeam;
-            existingMatchResult.Result  = matchResultRequestDto.Result;
+            existingMatchResult.MatchId      = matchResultRequestDto.MatchId;
+            existingMatchResult.WinnerTeamId = matchResultRequestDto.WinnerTeamId;
+            existingMatchResult.Result       = matchResultRequestDto.Result;
 
             await _context.SaveChangesAsync();
             

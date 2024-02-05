@@ -14,10 +14,13 @@ namespace TournXBack.src.modules.Teams.Repositories
             var lastTeam = await _context.Teams.OrderByDescending(p => p.Id).FirstOrDefaultAsync();
             if (lastTeam != null) {
                 var newTeam = new Team {
-                    Id = lastTeam.Id + 1,
-                    Name = teamRequestDto.Name,
-                    Level = teamRequestDto.Level,
-                    Game = teamRequestDto.Game
+                    Id             = lastTeam.Id + 1,
+                    Name           = teamRequestDto.Name,
+                    Level          = teamRequestDto.Level,
+                    Game           = teamRequestDto.Game,
+                    MaxPlayers     = teamRequestDto.MaxPlayers,
+                    LeaderPlayerId = teamRequestDto.LeaderPlayerId,
+                    Players        = teamRequestDto.Players
                 };
                 await _context.Teams.AddAsync(newTeam);
                 await _context.SaveChangesAsync();
@@ -25,10 +28,13 @@ namespace TournXBack.src.modules.Teams.Repositories
             }
             else {
                 var newTeam = new Team {
-                    Id = 1,
-                    Name = teamRequestDto.Name,
-                    Level = teamRequestDto.Level,
-                    Game = teamRequestDto.Game
+                    Id             = 1,
+                    Name           = teamRequestDto.Name,
+                    Level          = teamRequestDto.Level,
+                    Game           = teamRequestDto.Game,
+                    MaxPlayers     = teamRequestDto.MaxPlayers,
+                    LeaderPlayerId = teamRequestDto.LeaderPlayerId,
+                    Players        = teamRequestDto.Players
                 };
                 await _context.Teams.AddAsync(newTeam);
                 await _context.SaveChangesAsync();
@@ -63,9 +69,12 @@ namespace TournXBack.src.modules.Teams.Repositories
             var existingTeam = await _context.Teams.FirstOrDefaultAsync(x => x.Id == id);
             if (existingTeam == null) return null;
 
-            existingTeam.Name = teamRequestDto.Name;
-            existingTeam.Level = teamRequestDto.Level;
-            existingTeam.Game = teamRequestDto.Game;
+            existingTeam.Name           = teamRequestDto.Name;
+            existingTeam.Level          = teamRequestDto.Level;
+            existingTeam.Game           = teamRequestDto.Game;
+            existingTeam.MaxPlayers     = teamRequestDto.MaxPlayers;
+            existingTeam.LeaderPlayerId = teamRequestDto.LeaderPlayerId;
+            existingTeam.Players        = teamRequestDto.Players;
 
             await _context.SaveChangesAsync();
             

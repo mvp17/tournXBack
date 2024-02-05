@@ -11,16 +11,15 @@ namespace TournXBack.src.modules.Rounds.Models
         public int NumTeams { get; set; }
         
         [Required]
-        public int Winner { get; set; }
+        public int WinnerTeamId { get; set; }
         
         [Required]
         public int[] Rivals { get; set; } = [];
         
-        [Required]
-        public int NextRound { get; set; }
+        public int? NextRoundId { get; set; }
         
         [Required]
-        public int Tournament { get; set; }
+        public int TournamentId { get; set; }
         
         [Required]
         public bool HasWinner { get; set; }

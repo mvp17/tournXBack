@@ -14,10 +14,11 @@ namespace TournXBack.src.modules.TournamentInvitations.Repositories
             var lastTournamentInvitation = await _context.TournamentInvitations.OrderByDescending(p => p.Id).FirstOrDefaultAsync();
             if (lastTournamentInvitation != null) {
                 var newTournamentInvitation = new TournamentInvitation {
-                    Id      = lastTournamentInvitation.Id + 1,
-                    Tournament = tournamentInvitationRequestDto.Tournament,
-                    Team    = tournamentInvitationRequestDto.Team,
-                    Message = tournamentInvitationRequestDto.Message,
+                    Id                     = lastTournamentInvitation.Id + 1,
+                    InvitesTo_tournamentId = tournamentInvitationRequestDto.InvitesTo_tournamentId,
+                    TeamId                 = tournamentInvitationRequestDto.TeamId,
+                    Message                = tournamentInvitationRequestDto.Message,
+                    Invites_playerId       = tournamentInvitationRequestDto.Invites_playerId
                 };
                 await _context.TournamentInvitations.AddAsync(newTournamentInvitation);
                 await _context.SaveChangesAsync();
@@ -25,10 +26,11 @@ namespace TournXBack.src.modules.TournamentInvitations.Repositories
             }
             else {
                 var newTournamentInvitation = new TournamentInvitation {
-                    Id      = 1,
-                    Tournament = tournamentInvitationRequestDto.Tournament,
-                    Team    = tournamentInvitationRequestDto.Team,
-                    Message = tournamentInvitationRequestDto.Message,
+                    Id                     = 1,
+                    InvitesTo_tournamentId = tournamentInvitationRequestDto.InvitesTo_tournamentId,
+                    TeamId                 = tournamentInvitationRequestDto.TeamId,
+                    Message                = tournamentInvitationRequestDto.Message,
+                    Invites_playerId       = tournamentInvitationRequestDto.Invites_playerId
                 };
                 await _context.TournamentInvitations.AddAsync(newTournamentInvitation);
                 await _context.SaveChangesAsync();
@@ -63,9 +65,10 @@ namespace TournXBack.src.modules.TournamentInvitations.Repositories
             var existingTournamentInvitation = await _context.TournamentInvitations.FirstOrDefaultAsync(x => x.Id == id);
             if (existingTournamentInvitation == null) return null;
 
-            existingTournamentInvitation.Tournament = existingTournamentInvitation.Tournament;
-            existingTournamentInvitation.Team       = existingTournamentInvitation.Team;
-            existingTournamentInvitation.Message    = existingTournamentInvitation.Message;
+            existingTournamentInvitation.InvitesTo_tournamentId = tournamentInvitationRequestDto.InvitesTo_tournamentId;
+            existingTournamentInvitation.TeamId                 = tournamentInvitationRequestDto.TeamId;
+            existingTournamentInvitation.Message                = tournamentInvitationRequestDto.Message;
+            existingTournamentInvitation.Invites_playerId       = tournamentInvitationRequestDto.Invites_playerId;
 
             await _context.SaveChangesAsync();
             

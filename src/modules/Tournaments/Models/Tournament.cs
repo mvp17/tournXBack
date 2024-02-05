@@ -20,6 +20,6 @@ namespace TournXBack.src.modules.Tournaments.Models
         public int[] Participants { get; set; } = [];
         public int TeamId { get; set; }
         public int BestOf { get; set; }
-        public TournamentState State { get; set; } = TournamentState.UNINITIALIZED;
+        public TournamentState? State { get; set; } = TournamentState.UNINITIALIZED;
     }
 }

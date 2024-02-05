@@ -14,14 +14,14 @@ namespace TournXBack.src.modules.Rounds.Repositories
             var lastRound = await _context.Rounds.OrderByDescending(p => p.Id).FirstOrDefaultAsync();
             if (lastRound != null) {
                 var newRound = new Round {
-                    Id = lastRound.Id + 1,
-                    BestOf     = roundRequestDto.BestOf,
-                    NumTeams   = roundRequestDto.NumTeams,
-                    Winner     = roundRequestDto.Winner,
-                    Rivals     = roundRequestDto.Rivals,
-                    NextRound  = roundRequestDto.NextRound,
-                    Tournament = roundRequestDto.Tournament,
-                    HasWinner  = roundRequestDto.HasWinner
+                    Id           = lastRound.Id + 1,
+                    BestOf       = roundRequestDto.BestOf,
+                    NumTeams     = roundRequestDto.NumTeams,
+                    WinnerTeamId = roundRequestDto.WinnerTeamId,
+                    Rivals       = roundRequestDto.Rivals,
+                    NextRoundId  = roundRequestDto.NextRoundId,
+                    TournamentId = roundRequestDto.TournamentId,
+                    HasWinner    = roundRequestDto.HasWinner
                 };
                 await _context.Rounds.AddAsync(newRound);
                 await _context.SaveChangesAsync();
@@ -29,14 +29,14 @@ namespace TournXBack.src.modules.Rounds.Repositories
             }
             else {
                 var newRound = new Round {
-                    Id = 1,
-                    BestOf     = roundRequestDto.BestOf,
-                    NumTeams   = roundRequestDto.NumTeams,
-                    Winner     = roundRequestDto.Winner,
-                    Rivals     = roundRequestDto.Rivals,
-                    NextRound  = roundRequestDto.NextRound,
-                    Tournament = roundRequestDto.Tournament,
-                    HasWinner  = roundRequestDto.HasWinner
+                    Id           = 1,
+                    BestOf       = roundRequestDto.BestOf,
+                    NumTeams     = roundRequestDto.NumTeams,
+                    WinnerTeamId = roundRequestDto.WinnerTeamId,
+                    Rivals       = roundRequestDto.Rivals,
+                    NextRoundId  = roundRequestDto.NextRoundId,
+                    TournamentId = roundRequestDto.TournamentId,
+                    HasWinner    = roundRequestDto.HasWinner
                 };
                 await _context.Rounds.AddAsync(newRound);
                 await _context.SaveChangesAsync();
@@ -71,13 +71,13 @@ namespace TournXBack.src.modules.Rounds.Repositories
             var existingRound = await _context.Rounds.FirstOrDefaultAsync(x => x.Id == id);
             if (existingRound == null) return null;
 
-            existingRound.BestOf     = roundRequestDto.BestOf;
-            existingRound.NumTeams   = roundRequestDto.NumTeams;
-            existingRound.Winner     = roundRequestDto.Winner;
-            existingRound.Rivals     = roundRequestDto.Rivals;
-            existingRound.NextRound  = roundRequestDto.NextRound;
-            existingRound.Tournament = roundRequestDto.Tournament;
-            existingRound.HasWinner  = roundRequestDto.HasWinner;
+            existingRound.BestOf       = roundRequestDto.BestOf;
+            existingRound.NumTeams     = roundRequestDto.NumTeams;
+            existingRound.WinnerTeamId = roundRequestDto.WinnerTeamId;
+            existingRound.Rivals       = roundRequestDto.Rivals;
+            existingRound.NextRoundId  = roundRequestDto.NextRoundId;
+            existingRound.TournamentId = roundRequestDto.TournamentId;
+            existingRound.HasWinner    = roundRequestDto.HasWinner;
 
             await _context.SaveChangesAsync();
             

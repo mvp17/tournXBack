@@ -15,10 +15,10 @@ namespace TournXBack.src.modules.Matches.Repositories
             if (lastMatch != null) {
                 var newMatch = new Match {
                     Id = lastMatch.Id + 1,
-                    Description = matchRequestDto.Description,
-                    Winner      = matchRequestDto.Winner,
-                    Round       = matchRequestDto.Round,
-                    HasWinner   = matchRequestDto.HasWinner
+                    Description  = matchRequestDto.Description,
+                    WinnerTeamId = matchRequestDto.WinnerTeamId,
+                    RoundId      = matchRequestDto.RoundId,
+                    HasWinner    = matchRequestDto.HasWinner
                 };
                 await _context.Matches.AddAsync(newMatch);
                 await _context.SaveChangesAsync();
@@ -28,9 +28,9 @@ namespace TournXBack.src.modules.Matches.Repositories
                 var newMatch = new Match {
                     Id = 1,
                     Description = matchRequestDto.Description,
-                    Winner      = matchRequestDto.Winner,
-                    Round       = matchRequestDto.Round,
-                    HasWinner   = matchRequestDto.HasWinner
+                    WinnerTeamId = matchRequestDto.WinnerTeamId,
+                    RoundId      = matchRequestDto.RoundId,
+                    HasWinner    = matchRequestDto.HasWinner
                 };
                 await _context.Matches.AddAsync(newMatch);
                 await _context.SaveChangesAsync();
@@ -65,10 +65,10 @@ namespace TournXBack.src.modules.Matches.Repositories
             var existingMatch = await _context.Matches.FirstOrDefaultAsync(x => x.Id == id);
             if (existingMatch == null) return null;
 
-            existingMatch.Description = matchRequestDto.Description;
-            existingMatch.Winner      = matchRequestDto.Winner;
-            existingMatch.Round       = matchRequestDto.Round;
-            existingMatch.HasWinner   = matchRequestDto.HasWinner;
+            existingMatch.Description  = matchRequestDto.Description;
+            existingMatch.WinnerTeamId = matchRequestDto.WinnerTeamId;
+            existingMatch.RoundId      = matchRequestDto.RoundId;
+            existingMatch.HasWinner    = matchRequestDto.HasWinner;
 
             await _context.SaveChangesAsync();
             

@@ -5,12 +5,15 @@ namespace TournXBack.src.modules.TeamInvitations.Models
     public class TeamInvitationRequestDto
     {
         [Required]
-        public string Player { get; set; } = string.Empty;
+        public int PlayerId { get; set; }
         
         [Required]
-        public string Team { get; set; } = string.Empty;
+        public int TeamId { get; set; }
         
         [Required]
         public string Message { get; set; } = string.Empty;
+
+        [Required]
+        public bool Accepted { get; set; }
     }
 }

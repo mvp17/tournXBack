@@ -14,10 +14,11 @@ namespace TournXBack.src.modules.TeamInvitations.Repositories
             var lastTeamInvitation = await _context.TeamInvitations.OrderByDescending(p => p.Id).FirstOrDefaultAsync();
             if (lastTeamInvitation != null) {
                 var newTeamInvitation = new TeamInvitation {
-                    Id      = lastTeamInvitation.Id + 1,
-                    Player  = teamInvitationRequestDto.Player,
-                    Team    = teamInvitationRequestDto.Team,
-                    Message = teamInvitationRequestDto.Message,
+                    Id       = lastTeamInvitation.Id + 1,
+                    PlayerId = teamInvitationRequestDto.PlayerId,
+                    TeamId   = teamInvitationRequestDto.TeamId,
+                    Message  = teamInvitationRequestDto.Message,
+                    Accepted = teamInvitationRequestDto.Accepted
                 };
                 await _context.TeamInvitations.AddAsync(newTeamInvitation);
                 await _context.SaveChangesAsync();
@@ -25,10 +26,11 @@ namespace TournXBack.src.modules.TeamInvitations.Repositories
             }
             else {
                 var newTeamInvitation = new TeamInvitation {
-                    Id      = 1,
-                    Player  = teamInvitationRequestDto.Player,
-                    Team    = teamInvitationRequestDto.Team,
-                    Message = teamInvitationRequestDto.Message,
+                    Id       = 1,
+                    PlayerId = teamInvitationRequestDto.PlayerId,
+                    TeamId   = teamInvitationRequestDto.TeamId,
+                    Message  = teamInvitationRequestDto.Message,
+                    Accepted = teamInvitationRequestDto.Accepted
                 };
                 await _context.TeamInvitations.AddAsync(newTeamInvitation);
                 await _context.SaveChangesAsync();
@@ -63,9 +65,10 @@ namespace TournXBack.src.modules.TeamInvitations.Repositories
             var existingTeamInvitation = await _context.TeamInvitations.FirstOrDefaultAsync(x => x.Id == id);
             if (existingTeamInvitation == null) return null;
 
-            existingTeamInvitation.Player  = teamInvitationRequestDto.Player;
-            existingTeamInvitation.Team    = teamInvitationRequestDto.Team;
-            existingTeamInvitation.Message = teamInvitationRequestDto.Message;
+            existingTeamInvitation.PlayerId = teamInvitationRequestDto.PlayerId;
+            existingTeamInvitation.TeamId   = teamInvitationRequestDto.TeamId;
+            existingTeamInvitation.Message  = teamInvitationRequestDto.Message;
+            existingTeamInvitation.Accepted = teamInvitationRequestDto.Accepted;
 
             await _context.SaveChangesAsync();
             
