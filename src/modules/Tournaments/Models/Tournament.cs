@@ -17,7 +17,7 @@ namespace TournXBack.src.modules.Tournaments.Models
         public int MinTeamPlayers { get; set; }
         public int MaxTeamPlayers { get; set; }
         // Many to Many
-        public List<TournamentTeam> Participants { get; set; } = [];
+        public int[] Participants { get; set; } = [];
         public int TeamId { get; set; }
         public int BestOf { get; set; }
         public TournamentState State { get; set; } = TournamentState.UNINITIALIZED;
