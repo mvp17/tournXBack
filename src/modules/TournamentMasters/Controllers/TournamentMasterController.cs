@@ -16,8 +16,8 @@ namespace TournXBack.src.modules.TournamentMasters.Controllers
         private readonly ITokenService _tokenService;
 
         public TournamentMasterController(UserManager<TournamentMaster> userManager, 
-                                ITokenService tokenService, 
-                                SignInManager<TournamentMaster> signInManager)
+                                          ITokenService tokenService, 
+                                          SignInManager<TournamentMaster> signInManager)
         {
             _userManager = userManager;
             _signinManager = signInManager;
@@ -48,7 +48,7 @@ namespace TournXBack.src.modules.TournamentMasters.Controllers
                     if (roleResult.Succeeded) 
                         return Ok( new NewUserDto
                             {
-                                UserName = tournamentMaster.UserName,
+                                Username = tournamentMaster.UserName,
                                 Email = tournamentMaster.Email,
                                 Token = _tokenService.CreateToken(tournamentMaster)
                             });
@@ -81,7 +81,7 @@ namespace TournXBack.src.modules.TournamentMasters.Controllers
             return Ok(
                 new NewUserDto
                 {
-                    UserName = user.UserName,
+                    Username = user.UserName,
                     Email = user.Email,
                     Token = _tokenService.CreateToken(user)
                 }

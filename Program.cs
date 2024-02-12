@@ -72,6 +72,17 @@ builder.Services.AddScoped<IMatchRepository, MatchRepository>();
 builder.Services.AddScoped<IRoundRepository, RoundRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 
+builder.Services.AddCors(options => 
+{
+    options.AddPolicy("VueApp", policyBuilder =>
+    {
+        policyBuilder.WithOrigins("http://localhost:3000");
+        policyBuilder.AllowAnyHeader();
+        policyBuilder.AllowAnyMethod();
+        policyBuilder.AllowCredentials();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -84,6 +95,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
+app.UseCors("VueApp");
 app.Run();

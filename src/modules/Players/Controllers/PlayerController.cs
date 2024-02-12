@@ -48,7 +48,7 @@ namespace TournXBack.src.modules.Players.Controllers
                     if (roleResult.Succeeded) 
                         return Ok( new NewUserDto
                             {
-                                UserName = player.UserName,
+                                Username = player.UserName,
                                 Email = player.Email,
                                 Token = _tokenService.CreateToken(player)
                             });
@@ -81,7 +81,7 @@ namespace TournXBack.src.modules.Players.Controllers
             return Ok(
                 new NewUserDto
                 {
-                    UserName = user.UserName,
+                    Username = user.UserName,
                     Email = user.Email,
                     Token = _tokenService.CreateToken(user)
                 }
