@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using TournXBack.src.core.Data;
-using TournXBack.src.modules.Players.Models;
 using TournXBack.src.modules.Teams.Interfaces;
 using TournXBack.src.modules.Teams.Repositories;
 using TournXBack.src.modules.Tournaments.Interfaces;
@@ -19,6 +18,10 @@ using TournXBack.src.modules.Matches.Repositories;
 using TournXBack.src.modules.Matches.Interfaces;
 using TournXBack.src.modules.Rounds.Interfaces;
 using TournXBack.src.modules.Rounds.Repositories;
+using TournXBack.src.modules.Players.interfaces;
+using TournXBack.src.modules.Players.Repositories;
+using TournXBack.src.modules.TournamentMasters.Models;
+using TournXBack.src.modules.Players.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,7 +42,8 @@ builder.Services.AddIdentity<Player, IdentityRole>(
         options.Password.RequireLowercase = true;
         options.Password.RequireNonAlphanumeric = true;
         options.Password.RequiredLength = 6;
-    }).AddEntityFrameworkStores<TournXDB>();
+    }).AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<TournXDB>();
 
 builder.Services.AddAuthentication(
     options => {
@@ -62,6 +66,7 @@ builder.Services.AddAuthentication(
         };
     }
 );
+//builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<ITeamRepository, TeamRepository>();
 builder.Services.AddScoped<ITournamentRepository, TournamentRepository>();
@@ -71,6 +76,7 @@ builder.Services.AddScoped<ITournamentInvitationRepository, TournamentInvitation
 builder.Services.AddScoped<IMatchRepository, MatchRepository>();
 builder.Services.AddScoped<IRoundRepository, RoundRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
 
 builder.Services.AddCors(options => 
 {

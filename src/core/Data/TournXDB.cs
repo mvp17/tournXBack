@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using TournXBack.src.core.Models;
 using TournXBack.src.modules.Matches.Models;
 using TournXBack.src.modules.MatchResults.Models;
 using TournXBack.src.modules.Players.Models;
@@ -12,7 +13,7 @@ using TournXBack.src.modules.Tournaments.Models;
 
 namespace TournXBack.src.core.Data
 {
-    public class TournXDB : IdentityDbContext<Player>
+    public class TournXDB : IdentityDbContext<User>
     {
         public TournXDB(DbContextOptions<TournXDB> options) : base(options)
         {
@@ -26,13 +27,14 @@ namespace TournXBack.src.core.Data
         public DbSet<TournamentInvitation> TournamentInvitations => Set<TournamentInvitation>();
         public DbSet<Match> Matches => Set<Match>();
         public DbSet<Round> Rounds => Set<Round>();
+        public DbSet<Player> Players => Set<Player>();
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder); 
 
-            List<IdentityRole> roles = new()
-            {
+            List<IdentityRole> roles =
+            [
                 new() {
                     Name = "Admin",
                     NormalizedName = "ADMIN"
@@ -45,7 +47,7 @@ namespace TournXBack.src.core.Data
                     Name = "Tournament Master",
                     NormalizedName = "TOURNAMENT MASTER"
                 }
-            };
+            ];
             builder.Entity<IdentityRole>().HasData(roles);
         }
     }

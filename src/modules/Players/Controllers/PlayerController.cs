@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TournXBack.src.core.Models;
 using TournXBack.src.core.Services;
+using TournXBack.src.modules.Players.interfaces;
 using TournXBack.src.modules.Players.Models;
 
 namespace TournXBack.src.modules.Players.Controllers
@@ -14,14 +16,26 @@ namespace TournXBack.src.modules.Players.Controllers
         private readonly UserManager<Player> _userManager;
         private readonly SignInManager<Player> _signinManager;
         private readonly ITokenService _tokenService;
+        private readonly IPlayerRepository _playerRepository;
 
         public PlayerController(UserManager<Player> userManager, 
                                 ITokenService tokenService, 
-                                SignInManager<Player> signInManager)
+                                SignInManager<Player> signInManager,
+                                IPlayerRepository playerRepository)
         {
             _userManager = userManager;
             _signinManager = signInManager;
             _tokenService = tokenService;
+            _playerRepository = playerRepository;
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Player")]
+        public async Task<IActionResult> GetAll()
+        {
+            if (!ModelState.IsValid) return BadRequest();
+            var players = await _playerRepository.GetAllAsync();
+            return Ok(players);
         }
 
         [HttpPost("register")]
