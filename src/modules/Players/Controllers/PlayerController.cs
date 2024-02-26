@@ -30,12 +30,21 @@ namespace TournXBack.src.modules.Players.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Player")]
+        [Authorize/*(Roles = "Player")*/]
         public async Task<IActionResult> GetAll()
         {
             if (!ModelState.IsValid) return BadRequest();
             var players = await _playerRepository.GetAllAsync();
-            return Ok(players);
+            List<PlayerDto> formattedPlayers = [];
+            foreach (Player player in players)
+            {
+                formattedPlayers.Add(new PlayerDto
+                {
+                    Id = player.Id,
+                    Username = player.UserName
+                });
+            }
+            return Ok(formattedPlayers);
         }
 
         [HttpPost("register")]

@@ -20,9 +20,9 @@ namespace TournXBack.src.modules.Teams.Models
         public int MaxPlayers { get; set; }
         
         [Required]
-        public int LeaderPlayerId { get; set; }
+        public string LeaderPlayerId { get; set; } = string.Empty;
 
         [Required]
-        public int[] Players { get; set; } = [];
+        public string[] Players { get; set; } = [];
     }
 }

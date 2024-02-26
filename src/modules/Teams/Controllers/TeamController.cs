@@ -16,7 +16,7 @@ namespace TournXBack.src.modules.Teams.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Player")]
+        [Authorize/*(Roles = "Player")*/]
         public async Task<IActionResult> GetAll()
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -25,7 +25,7 @@ namespace TournXBack.src.modules.Teams.Controllers
         }
 
         [HttpGet("{id:int}")]
-        [Authorize(Roles = "Player")]
+        [Authorize/*(Roles = "Player")*/]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
             var team = await _teamRepository.GetByIdAsync(id);
@@ -34,7 +34,7 @@ namespace TournXBack.src.modules.Teams.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Player")]
+        [Authorize/*(Roles = "Player")*/]
         public async Task<IActionResult> Create([FromBody] TeamRequestDto teamDto)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -43,7 +43,7 @@ namespace TournXBack.src.modules.Teams.Controllers
         }
 
         [HttpPut]
-        [Authorize(Roles = "Player")]
+        [Authorize/*(Roles = "Player")*/]
         [Route("{id:int}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] TeamRequestDto teamDto)
         {
@@ -55,7 +55,7 @@ namespace TournXBack.src.modules.Teams.Controllers
         }
 
         [HttpDelete]
-        [Authorize(Roles = "Player")]
+        [Authorize/*(Roles = "Player")*/]
         [Route("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {

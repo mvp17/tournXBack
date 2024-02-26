@@ -10,8 +10,8 @@ namespace TournXBack.src.modules.Teams.Models
         public string Level { get; set; } = string.Empty;
         public string Game { get; set; } = string.Empty;
         public int MaxPlayers { get; set; }
-        public int LeaderPlayerId { get; set; }
+        public string LeaderPlayerId { get; set; } = string.Empty;
         // Many to Many
-        public int[] Players { get; set; } = [];
+        public string[] Players { get; set; } = [];
     }
 }
