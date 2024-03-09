@@ -1,9 +1,8 @@
-using TournXBack.src.core.Models;
-
+using Microsoft.AspNetCore.Identity;
 namespace TournXBack.src.core.Services
 {
     public interface ITokenService
     {
-        string? CreateToken(User user);
+        string? CreateToken(IdentityUser user, IList<string> roles);
     }
 }

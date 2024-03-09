@@ -1,8 +1,8 @@
-using TournXBack.src.core.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace TournXBack.src.modules.TournamentMasters.Models 
 {
-    public class TournamentMaster : User
+    public class Master : IdentityUser
     {
     }
 }

@@ -13,14 +13,14 @@ namespace TournXBack.src.modules.Players.Controllers
     [ApiController]
     public class PlayerController : ControllerBase
     {
-        private readonly UserManager<Player> _userManager;
-        private readonly SignInManager<Player> _signinManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signinManager;
         private readonly ITokenService _tokenService;
         private readonly IPlayerRepository _playerRepository;
 
-        public PlayerController(UserManager<Player> userManager, 
+        public PlayerController(UserManager<IdentityUser> userManager, 
                                 ITokenService tokenService, 
-                                SignInManager<Player> signInManager,
+                                SignInManager<IdentityUser> signInManager,
                                 IPlayerRepository playerRepository)
         {
             _userManager = userManager;
@@ -30,7 +30,7 @@ namespace TournXBack.src.modules.Players.Controllers
         }
 
         [HttpGet]
-        [Authorize/*(Roles = "Player")*/]
+        [Authorize(Roles = "Player, Master")]
         public async Task<IActionResult> GetAll()
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -73,7 +73,7 @@ namespace TournXBack.src.modules.Players.Controllers
                             {
                                 Username = player.UserName,
                                 Email = player.Email,
-                                Token = _tokenService.CreateToken(player)
+                                Token = _tokenService.CreateToken(player, ["Player"])
                             });
                     else return StatusCode(500, roleResult.Errors);
                 }
@@ -106,7 +106,7 @@ namespace TournXBack.src.modules.Players.Controllers
                 {
                     Username = user.UserName,
                     Email = user.Email,
-                    Token = _tokenService.CreateToken(user)
+                    Token = _tokenService.CreateToken(user, ["Player"])
                 }
             );
         }

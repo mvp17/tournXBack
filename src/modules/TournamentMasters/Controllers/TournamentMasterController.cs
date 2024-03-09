@@ -11,13 +11,13 @@ namespace TournXBack.src.modules.TournamentMasters.Controllers
     [ApiController]
     public class TournamentMasterController : ControllerBase
     {
-        private readonly UserManager<TournamentMaster> _userManager;
-        private readonly SignInManager<TournamentMaster> _signinManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signinManager;
         private readonly ITokenService _tokenService;
 
-        public TournamentMasterController(UserManager<TournamentMaster> userManager, 
+        public TournamentMasterController(UserManager<IdentityUser> userManager, 
                                           ITokenService tokenService, 
-                                          SignInManager<TournamentMaster> signInManager)
+                                          SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
             _signinManager = signInManager;
@@ -31,30 +31,31 @@ namespace TournXBack.src.modules.TournamentMasters.Controllers
             {
                 if (!ModelState.IsValid) return BadRequest(ModelState);
 
-                var tournamentMaster = new TournamentMaster
+                var tournamentMaster = new Master
                 {
                     UserName = tournamentMasterRequestDto.Username,
                     Email = tournamentMasterRequestDto.Email
                 };
-
+                
                 if  (tournamentMasterRequestDto.Password == null) return BadRequest("Password cannot be null");
                 
                 var createdUser = await _userManager.CreateAsync(tournamentMaster, tournamentMasterRequestDto.Password);
 
                 if (createdUser.Succeeded)
                 {
-                    var roleResult = await _userManager.AddToRoleAsync(tournamentMaster, "Tournament Master");
+                    var roleResult = await _userManager.AddToRoleAsync(tournamentMaster, "Master");
                     
                     if (roleResult.Succeeded) 
                         return Ok( new NewUserDto
                             {
                                 Username = tournamentMaster.UserName,
                                 Email = tournamentMaster.Email,
-                                Token = _tokenService.CreateToken(tournamentMaster)
+                                Token = _tokenService.CreateToken(tournamentMaster, ["Master"])
                             });
                     else return StatusCode(500, roleResult.Errors);
                 }
                 else return StatusCode(500, createdUser.Errors);
+                
             } catch (Exception e)
             {
                 return StatusCode(500, e);
@@ -83,7 +84,7 @@ namespace TournXBack.src.modules.TournamentMasters.Controllers
                 {
                     Username = user.UserName,
                     Email = user.Email,
-                    Token = _tokenService.CreateToken(user)
+                    Token = _tokenService.CreateToken(user, ["Master"])
                 }
             );
         }

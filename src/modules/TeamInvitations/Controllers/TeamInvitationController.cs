@@ -16,7 +16,7 @@ namespace TournXBack.src.modules.TeamInvitations.Controllers
         }
 
         [HttpGet]
-        [Authorize/*(Roles = "Player")*/]
+        [Authorize(Roles = "Player")]
         public async Task<IActionResult> GetAll()
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -43,7 +43,7 @@ namespace TournXBack.src.modules.TeamInvitations.Controllers
         }
 
         [HttpPut]
-        [Authorize/*(Roles = "Player")*/]
+        [Authorize(Roles = "Player")]
         [Route("{id:int}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] TeamInvitationRequestDto teamInvitationRequestDto)
         {
@@ -55,7 +55,7 @@ namespace TournXBack.src.modules.TeamInvitations.Controllers
         }
 
         [HttpDelete]
-        [Authorize/*(Roles = "Player")*/]
+        [Authorize(Roles = "Player")]
         [Route("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {

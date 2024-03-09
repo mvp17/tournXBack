@@ -20,8 +20,6 @@ using TournXBack.src.modules.Rounds.Interfaces;
 using TournXBack.src.modules.Rounds.Repositories;
 using TournXBack.src.modules.Players.interfaces;
 using TournXBack.src.modules.Players.Repositories;
-using TournXBack.src.modules.TournamentMasters.Models;
-using TournXBack.src.modules.Players.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,14 +34,16 @@ builder.Services.AddDbContext<TournXDB>(options =>
     options.UseNpgsql(connectionString)
 );
 
-builder.Services.AddIdentity<Player, IdentityRole>(
-    options => {
-        options.Password.RequireDigit = true;
-        options.Password.RequireLowercase = true;
-        options.Password.RequireNonAlphanumeric = true;
-        options.Password.RequiredLength = 6;
-    }).AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<TournXDB>();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(
+                    options => {
+                        options.Password.RequireDigit = true;
+                        options.Password.RequireLowercase = true;
+                        options.Password.RequireNonAlphanumeric = true;
+                        options.Password.RequiredLength = 6;
+                    }
+                )
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<TournXDB>();
 
 builder.Services.AddAuthentication(
     options => {
@@ -66,7 +66,6 @@ builder.Services.AddAuthentication(
         };
     }
 );
-//builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<ITeamRepository, TeamRepository>();
 builder.Services.AddScoped<ITournamentRepository, TournamentRepository>();
@@ -99,6 +98,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+// Note order matters ***
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

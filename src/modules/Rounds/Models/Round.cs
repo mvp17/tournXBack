@@ -6,6 +6,7 @@ namespace TournXBack.src.modules.Rounds.Models
     public class Round
     {
         public int Id { get; set; }
+        public string Description { get; set; } = string.Empty;
         public int BestOf { get; set; } = 1;
         public int NumTeams { get; set; } = 2;
         public int WinnerTeamId { get; set; }

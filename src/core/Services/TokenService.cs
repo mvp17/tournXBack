@@ -1,8 +1,8 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using TournXBack.src.core.Models;
 
 namespace TournXBack.src.core.Services
 {
@@ -16,7 +16,7 @@ namespace TournXBack.src.core.Services
             _config = config;
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SigningKey"] ?? throw new ArgumentNullException("JWT:SigningKey")));
         }
-        public string? CreateToken(User user)
+        public string? CreateToken(IdentityUser user, IList<string> roles)
         {
             if (user.Email == null || user.UserName == null) return null;
             var claims = new List<Claim>
@@ -24,6 +24,13 @@ namespace TournXBack.src.core.Services
                 new(JwtRegisteredClaimNames.Email, user.Email),
                 new(JwtRegisteredClaimNames.GivenName, user.UserName)
             };
+
+            // Add role claims
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
             var tokenDescriptor = new SecurityTokenDescriptor
             {

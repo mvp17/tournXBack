@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using TournXBack.src.core.Models;
 using TournXBack.src.modules.Matches.Models;
 using TournXBack.src.modules.MatchResults.Models;
 using TournXBack.src.modules.Players.Models;
@@ -9,16 +8,14 @@ using TournXBack.src.modules.Rounds.Models;
 using TournXBack.src.modules.TeamInvitations.Models;
 using TournXBack.src.modules.Teams.Models;
 using TournXBack.src.modules.TournamentInvitations.Models;
+using TournXBack.src.modules.TournamentMasters.Models;
 using TournXBack.src.modules.Tournaments.Models;
 
 namespace TournXBack.src.core.Data
 {
-    public class TournXDB : IdentityDbContext<User>
+    public class TournXDB : IdentityDbContext<IdentityUser>
     {
-        public TournXDB(DbContextOptions<TournXDB> options) : base(options)
-        {
-
-        }
+        public TournXDB(DbContextOptions<TournXDB> options) : base(options) { }
         
         public DbSet<Team> Teams => Set<Team>();
         public DbSet<Tournament> Tournaments => Set<Tournament>();
@@ -28,6 +25,7 @@ namespace TournXBack.src.core.Data
         public DbSet<Match> Matches => Set<Match>();
         public DbSet<Round> Rounds => Set<Round>();
         public DbSet<Player> Players => Set<Player>();
+        public DbSet<Master> Masters => Set<Master>();
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -40,12 +38,12 @@ namespace TournXBack.src.core.Data
                     NormalizedName = "ADMIN"
                 },
                 new() {
-                    Name = "Player",
-                    NormalizedName = "PLAYER"
+                    Name = "Master",
+                    NormalizedName = "MASTER"
                 },
                 new() {
-                    Name = "Tournament Master",
-                    NormalizedName = "TOURNAMENT MASTER"
+                    Name = "Player",
+                    NormalizedName = "PLAYER"
                 }
             ];
             builder.Entity<IdentityRole>().HasData(roles);
