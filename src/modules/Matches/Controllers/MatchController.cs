@@ -5,6 +5,8 @@ using TournXBack.src.modules.Matches.Models;
 
 namespace TournXBack.src.modules.Matches.Controllers
 {
+    [Route("api/match")]
+    [ApiController]
     public class MatchController : ControllerBase
     {
         private readonly IMatchRepository _matchRepository;

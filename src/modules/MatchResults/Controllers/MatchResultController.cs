@@ -16,7 +16,7 @@ namespace TournXBack.src.modules.MatchResults.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Master")]
+        [Authorize(Roles = "Master, Player")]
         public async Task<IActionResult> GetAll()
         {
             if (!ModelState.IsValid) return BadRequest();

@@ -5,6 +5,8 @@ using TournXBack.src.modules.Rounds.Models;
 
 namespace TournXBack.src.modules.Rounds.Controllers
 {
+    [Route("api/round")]
+    [ApiController]
     public class RoundController : ControllerBase
     {
         private readonly IRoundRepository _roundRepository;
