@@ -9,6 +9,6 @@ namespace TournXBack.src.modules.TournamentInvitations.Models
         public int InvitesTo_tournamentId { get; set; }
         public int TeamId { get; set; }
         public string Message { get; set; } = string.Empty;
-        public int Invites_playerId { get; set; }
+        public string Invites_playerId { get; set; } = string.Empty;
     }
 }

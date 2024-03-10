@@ -10,7 +10,7 @@ namespace TournXBack.src.modules.Teams.Models
         public string Name { get; set; } = string.Empty;
         
         [Required]
-        public string Level { get; set; } = string.Empty;
+        public int Level { get; set; }
         
         [Required]
         public string Game { get; set; } = string.Empty;

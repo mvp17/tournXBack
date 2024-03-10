@@ -7,7 +7,7 @@ namespace TournXBack.src.modules.Teams.Models
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public string Level { get; set; } = string.Empty;
+        public int Level { get; set; }
         public string Game { get; set; } = string.Empty;
         public int MaxPlayers { get; set; }
         public string LeaderPlayerId { get; set; } = string.Empty;

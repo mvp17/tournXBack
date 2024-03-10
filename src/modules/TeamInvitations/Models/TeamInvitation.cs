@@ -6,7 +6,7 @@ namespace TournXBack.src.modules.TeamInvitations.Models
     public class TeamInvitation
     {
         public int Id { get; set; }
-        public int PlayerId { get; set; }
+        public string PlayerId { get; set; } = string.Empty;
         public int TeamId { get; set; }
         public string Message { get; set; } = string.Empty;
         public bool Accepted { get; set; } = false;

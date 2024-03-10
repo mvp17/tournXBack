@@ -43,7 +43,7 @@ namespace TournXBack.src.Tournaments.Controllers
         }
 
         [HttpPut]
-        [Authorize(Roles = "Tournament Master")]
+        [Authorize(Roles = "Master")]
         [Route("{id:int}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] TournamentRequestDto tournamentRequestDto)
         {
