@@ -9,6 +9,9 @@ namespace TournXBack.src.modules.Rounds.Models
         
         [Required]
         public int NumTeams { get; set; }
+
+        [Required]
+        public string Description { get; set; } = string.Empty;
         
         [Required]
         public int WinnerTeamId { get; set; }

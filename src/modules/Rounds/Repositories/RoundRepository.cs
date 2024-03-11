@@ -17,6 +17,7 @@ namespace TournXBack.src.modules.Rounds.Repositories
                     Id           = lastRound.Id + 1,
                     BestOf       = roundRequestDto.BestOf,
                     NumTeams     = roundRequestDto.NumTeams,
+                    Description  = roundRequestDto.Description,
                     WinnerTeamId = roundRequestDto.WinnerTeamId,
                     Rivals       = roundRequestDto.Rivals,
                     NextRoundId  = roundRequestDto.NextRoundId,
@@ -32,6 +33,7 @@ namespace TournXBack.src.modules.Rounds.Repositories
                     Id           = 1,
                     BestOf       = roundRequestDto.BestOf,
                     NumTeams     = roundRequestDto.NumTeams,
+                    Description  = roundRequestDto.Description,
                     WinnerTeamId = roundRequestDto.WinnerTeamId,
                     Rivals       = roundRequestDto.Rivals,
                     NextRoundId  = roundRequestDto.NextRoundId,
@@ -73,6 +75,7 @@ namespace TournXBack.src.modules.Rounds.Repositories
 
             existingRound.BestOf       = roundRequestDto.BestOf;
             existingRound.NumTeams     = roundRequestDto.NumTeams;
+            existingRound.Description  = roundRequestDto.Description;
             existingRound.WinnerTeamId = roundRequestDto.WinnerTeamId;
             existingRound.Rivals       = roundRequestDto.Rivals;
             existingRound.NextRoundId  = roundRequestDto.NextRoundId;

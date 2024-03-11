@@ -11,10 +11,10 @@ namespace TournXBack.src.modules.Matches.Repositories
 
         public async Task<Match> CreateAsync(MatchRequestDto matchRequestDto)
         {
-            var lastMatch = await _context.MatchResults.OrderByDescending(p => p.Id).FirstOrDefaultAsync();
+            var lastMatch = await _context.Matches.OrderByDescending(p => p.Id).FirstOrDefaultAsync();
             if (lastMatch != null) {
                 var newMatch = new Match {
-                    Id = lastMatch.Id + 1,
+                    Id           = lastMatch.Id + 1,
                     Description  = matchRequestDto.Description,
                     WinnerTeamId = matchRequestDto.WinnerTeamId,
                     RoundId      = matchRequestDto.RoundId,
@@ -26,8 +26,8 @@ namespace TournXBack.src.modules.Matches.Repositories
             }
             else {
                 var newMatch = new Match {
-                    Id = 1,
-                    Description = matchRequestDto.Description,
+                    Id           = 1,
+                    Description  = matchRequestDto.Description,
                     WinnerTeamId = matchRequestDto.WinnerTeamId,
                     RoundId      = matchRequestDto.RoundId,
                     HasWinner    = matchRequestDto.HasWinner
