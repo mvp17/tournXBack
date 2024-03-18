@@ -38,7 +38,7 @@ namespace TournXBack.src.modules.Tournaments.Models
         public int[] Participants { get; set; } = [];
         
         [Required]
-        public int TeamId { get; set; }
+        public int WinnerTeamId { get; set; }
         
         [Required]
         public int BestOf { get; set; }

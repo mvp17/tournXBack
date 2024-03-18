@@ -55,7 +55,7 @@ namespace TournXBack.src.modules.MatchResults.Controllers
         }
 
         [HttpDelete]
-        [Authorize(Roles = "Master")]
+        [Authorize(Roles = "Master, Player")]
         [Route("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {

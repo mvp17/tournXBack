@@ -16,7 +16,7 @@ namespace TournXBack.src.modules.Matches.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Master")]
+        [Authorize(Roles = "Master, Player")]
         public async Task<IActionResult> GetAll()
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -25,7 +25,7 @@ namespace TournXBack.src.modules.Matches.Controllers
         }
 
         [HttpGet("{id:int}")]
-        [Authorize(Roles = "Master")]
+        [Authorize(Roles = "Master, Player")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
             var match = await _matchRepository.GetByIdAsync(id);
@@ -34,7 +34,7 @@ namespace TournXBack.src.modules.Matches.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Master")]
+        [Authorize(Roles = "Master, Player")]
         public async Task<IActionResult> Create([FromBody] MatchRequestDto matchRequestDto)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -43,7 +43,7 @@ namespace TournXBack.src.modules.Matches.Controllers
         }
 
         [HttpPut]
-        [Authorize(Roles = "Master")]
+        [Authorize(Roles = "Master, Player")]
         [Route("{id:int}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] MatchRequestDto matchRequestDto)
         {

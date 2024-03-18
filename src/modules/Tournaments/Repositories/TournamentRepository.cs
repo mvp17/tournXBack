@@ -25,7 +25,7 @@ namespace TournXBack.src.modules.Tournaments.Repositories
                     MinTeamPlayers  = tournamentRequestDto.MinTeamPlayers,
                     MaxTeamPlayers  = tournamentRequestDto.MaxTeamPlayers,
                     Participants    = tournamentRequestDto.Participants,
-                    TeamId          = tournamentRequestDto.TeamId,
+                    WinnerTeamId    = tournamentRequestDto.WinnerTeamId,
                     BestOf          = tournamentRequestDto.BestOf,
                     State           = tournamentRequestDto.State
                 };
@@ -46,7 +46,7 @@ namespace TournXBack.src.modules.Tournaments.Repositories
                     MinTeamPlayers  = tournamentRequestDto.MinTeamPlayers,
                     MaxTeamPlayers  = tournamentRequestDto.MaxTeamPlayers,
                     Participants    = tournamentRequestDto.Participants,
-                    TeamId          = tournamentRequestDto.TeamId,
+                    WinnerTeamId    = tournamentRequestDto.WinnerTeamId,
                     BestOf          = tournamentRequestDto.BestOf,
                     State           = tournamentRequestDto.State
                 };
@@ -93,7 +93,7 @@ namespace TournXBack.src.modules.Tournaments.Repositories
             existingTournament.MinTeamPlayers  = tournamentRequestDto.MinTeamPlayers;
             existingTournament.MaxTeamPlayers  = tournamentRequestDto.MaxTeamPlayers;
             existingTournament.Participants    = tournamentRequestDto.Participants;
-            existingTournament.TeamId          = tournamentRequestDto.TeamId;
+            existingTournament.WinnerTeamId    = tournamentRequestDto.WinnerTeamId;
             existingTournament.BestOf          = tournamentRequestDto.BestOf;
             existingTournament.State           = tournamentRequestDto.State;
 
